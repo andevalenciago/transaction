@@ -8,10 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -33,6 +30,7 @@ public class BankTransactionAnalyzerSimple {
     public int suma2=0;
     public int mes;
     public String s;
+    public  int u;
 
 
     
@@ -63,7 +61,8 @@ public class BankTransactionAnalyzerSimple {
                 br =new BufferedReader(new FileReader(FILE));
                 String line = br.readLine();
                 Integer min = null;
-                
+                Map<Integer, String> monto_categ = new HashMap<Integer, String>();
+
                 while (null!=line) {
                     String[] fields = line.split(SEPARATOR);
                     int y = Integer.parseInt(fields[1]);
@@ -73,6 +72,16 @@ public class BankTransactionAnalyzerSimple {
                     suma = suma + y;
                     m = fields[0];
                     c = fields[2];
+                    monto_categ.put(y,c);
+
+                    if (monto_categ!=null){// intento de sumar los montos por categ. a travez de map
+                        monto_categ.get(y);
+
+                    }else{
+
+                        monto_categ.put(y,monto_categ.get(y)+y);
+                        u = Integer.parseInt(monto_categ.get(y)+y);
+                    }
 
                     SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
                     Date fechaDate = null;
